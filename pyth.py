@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import openpyxl
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
