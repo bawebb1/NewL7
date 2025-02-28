@@ -1,20 +1,21 @@
-try:
-    import joblib
-except ImportError:
-    import os
-    os.system('pip install joblib')
-    import joblib
 import streamlit as st
 import pandas as pd
-import joblib
 import openpyxl
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# Load dataset
-df = pd.read_excel('AmesHousing.xlsx')
+# Ensure joblib is installed
+try:
+    import joblib
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib"])
+    import joblib
 
-# Select relevant features (Modify based on dataset columns)
+# Load dataset
+df = pd.read_excel('AmesHousing.xlsx', engine='openpyxl')
+
+# Select relevant features
 features = ['OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt']
 target = 'SalePrice'
 
