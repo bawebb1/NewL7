@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 import subprocess
 import sys
 
-# Ensure required packages are installed
+# Packages did not work :(
 def install_if_missing(package):
     try:
         __import__(package)
@@ -19,30 +19,30 @@ install_if_missing("openpyxl")
 install_if_missing("joblib")
 
 
-# Load dataset
+# Load 
 df = pd.read_excel('AmesHousing.xlsx', engine='openpyxl')
 
-# Select relevant features
+
 features = ['OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt']
 target = 'SalePrice'
 
-# Data preprocessing
+# Data 
 X = df[features]
 y = df[target]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Train regression model
+# Train
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Save model
+# Save 
 joblib.dump(model, 'housing_model.pkl')
 
-# Streamlit app
+# Streamlit
 st.title('Ames Housing Price Predictor')
 st.write('Enter details to predict house price')
 
-# User input fields
+# User input
 inputs = {}
 for feature in features:
     inputs[feature] = st.number_input(f'{feature}', min_value=float(X[feature].min()), max_value=float(X[feature].max()), value=float(X[feature].median()))
