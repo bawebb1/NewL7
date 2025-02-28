@@ -4,13 +4,20 @@ import openpyxl
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+import subprocess
+import sys
 
-# Ensure joblib is installed
-try:
-    import joblib
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib"])
-    import joblib
+# Ensure required packages are installed
+def install_if_missing(package):
+    try:
+        __import__(package)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        __import__(package)
+
+install_if_missing("openpyxl")
+install_if_missing("joblib")
+
 
 # Load dataset
 df = pd.read_excel('AmesHousing.xlsx', engine='openpyxl')
