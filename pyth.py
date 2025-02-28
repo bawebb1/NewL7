@@ -1,3 +1,9 @@
+try:
+    import joblib
+except ImportError:
+    import os
+    os.system('pip install joblib')
+    import joblib
 import streamlit as st
 import pandas as pd
 import joblib
